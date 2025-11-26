@@ -1,5 +1,13 @@
 const posts = require("../data/posts");
 
+
+export const index = (req, res) => {
+    const { tag } = req.query;
+
+}
+
+
+
 function index(req, res) {
     res.json(posts);
 }
