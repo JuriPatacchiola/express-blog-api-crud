@@ -14,3 +14,8 @@ function show(req, res) {
 
     res.json(post);
 }
+
+
+function store(req, res) {
+    res.send("Creazione di un nuovo post");
+}
