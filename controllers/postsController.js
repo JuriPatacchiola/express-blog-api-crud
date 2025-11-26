@@ -1,9 +1,18 @@
 const posts = require("../data/posts");
 
 
-export const index = (req, res) => {
+function index(req, res) {
     const { tag } = req.query;
 
+    if (tag) {
+        const filtered = posts.filter(post =>
+            post.tags.map(t => t.toLowerCase()).includes(tag.toLowerCase())
+        );
+
+        return res.json(filtered);
+    }
+
+    res.json(posts);
 }
 
 
