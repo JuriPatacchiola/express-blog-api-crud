@@ -11,4 +11,6 @@ const {
 } = require("../controllers/postsController");
 
 
+router.get("/", index);
+
 module.exports = router;
