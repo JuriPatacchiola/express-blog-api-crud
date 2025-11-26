@@ -14,5 +14,7 @@ const {
 router.get("/", index);
 router.get("/:id", show);
 router.post("/", store);
+router.put("/:id", update);
+
 
 module.exports = router;
