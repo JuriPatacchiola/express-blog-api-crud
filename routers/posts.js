@@ -5,22 +5,4 @@ const router = express.Router();
 
 
 
-
-router.delete("/:id", (req, res) => {
-    const { id } = req.params;
-    const index = posts.findIndex(p => p.id === parseInt(id));
-
-    if (index === -1) {
-        return res.status(404).json({ error: "Post non trovato" });
-    }
-
-    const deletedPost = posts.splice(index, 1);
-
-    res.json({
-        message: "Post eliminato con successo",
-        deleted: deletedPost[0]
-    });
-});
-
-
 module.exports = router;
