@@ -41,3 +41,12 @@ function destroy(req, res) {
         deleted: deletedPost[0]
     });
 }
+
+
+module.exports = {
+    index,
+    show,
+    store,
+    update,
+    destroy
+};
