@@ -6,16 +6,6 @@ const router = express.Router();
 
 
 
-
-
-
-
-
-router.put("/:id", (req, res) => {
-    const { id } = req.params;
-    res.send(`Aggiornamento del post ${id}`);
-});
-
 router.delete("/:id", (req, res) => {
     const { id } = req.params;
     const index = posts.findIndex(p => p.id === parseInt(id));

@@ -19,3 +19,8 @@ function show(req, res) {
 function store(req, res) {
     res.send("Creazione di un nuovo post");
 }
+
+function update(req, res) {
+    const { id } = req.params;
+    res.send(`Aggiornamento del post ${id}`);
+}
