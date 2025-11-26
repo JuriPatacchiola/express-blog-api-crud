@@ -12,5 +12,6 @@ const {
 
 
 router.get("/", index);
+router.get("/:id", show);
 
 module.exports = router;
