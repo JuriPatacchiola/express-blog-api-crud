@@ -1,6 +1,6 @@
 const posts = require("../data/posts");
 
-function index(req, res) {
+const index = (req, res) => {
     const { tag } = req.query;
 
     if (tag) {
@@ -10,43 +10,70 @@ function index(req, res) {
 
         return res.json(filtered);
     }
-    res.json(posts);
-}
 
-function show(req, res) {
-    const { id } = req.params;
-    const post = posts.find(p => p.id === parseInt(id));
+    res.json(posts);
+};
+
+const show = (req, res) => {
+    const id = Number(req.params.id);
+    const post = posts.find(p => p.id === id);
 
     if (!post) {
         return res.status(404).json({ error: "Post non trovato" });
     }
 
     res.json(post);
-}
+};
 
-function store(req, res) {
-    res.send("Creazione di un nuovo post");
-}
+const store = (req, res) => {
+    const postData = req.body;
 
-function update(req, res) {
-    const { id } = req.params;
-    res.send(`Aggiornamento del post ${id}`);
-}
+    const newPost = {
+        id: posts.length + 1,
+        title: postData.title,
+        content: postData.content,
+        image: postData.image,
+        tags: postData.tags || []
+    };
 
-function destroy(req, res) {
-    const { id } = req.params;
-    const index = posts.findIndex(p => p.id === parseInt(id));
+    posts.push(newPost);
+
+    res.status(201).json(newPost);
+};
+
+const update = (req, res) => {
+    const postId = Number(req.params.id);
+    const postData = req.body;
+
+    const post = posts.find(p => p.id === postId);
+
+    if (!post) {
+        return res.status(404).json({
+            error: true,
+            message: "Not found!"
+        });
+    }
+
+    post.title = postData.title;
+    post.content = postData.content;
+    post.image = postData.image;
+    post.tags = postData.tags || post.tags;
+
+    res.json(post);
+};
+
+const destroy = (req, res) => {
+    const id = Number(req.params.id);
+    const index = posts.findIndex(p => p.id === id);
 
     if (index === -1) {
         return res.status(404).json({ error: "Post non trovato" });
     }
 
-    const deletedPost = posts.splice(index, 1);
-
-    console.log("Lista aggiornata:", posts);
+    posts.splice(index, 1);
 
     res.status(204).send();
-}
+};
 
 module.exports = {
     index,
