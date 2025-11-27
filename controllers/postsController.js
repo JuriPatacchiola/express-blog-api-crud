@@ -1,6 +1,5 @@
 const posts = require("../data/posts");
 
-
 function index(req, res) {
     const { tag } = req.query;
 
@@ -11,13 +10,6 @@ function index(req, res) {
 
         return res.json(filtered);
     }
-
-    res.json(posts);
-}
-
-
-
-function index(req, res) {
     res.json(posts);
 }
 
@@ -32,7 +24,6 @@ function show(req, res) {
     res.json(post);
 }
 
-
 function store(req, res) {
     res.send("Creazione di un nuovo post");
 }
@@ -41,7 +32,6 @@ function update(req, res) {
     const { id } = req.params;
     res.send(`Aggiornamento del post ${id}`);
 }
-
 
 function destroy(req, res) {
     const { id } = req.params;
@@ -53,12 +43,10 @@ function destroy(req, res) {
 
     const deletedPost = posts.splice(index, 1);
 
-    res.json({
-        message: "Post eliminato con successo",
-        deleted: deletedPost[0]
-    });
-}
+    console.log("Lista aggiornata:", posts);
 
+    res.status(204).send();
+}
 
 module.exports = {
     index,

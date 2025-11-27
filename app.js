@@ -1,9 +1,11 @@
 const express = require("express");
 const app = express();
-
+const postsRouter = require("./routers/posts");
 app.use(express.json());
 
-const postsRouter = require("./routers/posts");
+app.get("/", (req, res) => {
+    res.send("Server attivo! Benvenuto nell'API dei post!");
+});
 
 app.use("/posts", postsRouter);
 
